@@ -19,15 +19,15 @@ VERS=`$PYTHON --version | awk '{print $2}' 2>/dev/null`
 
 case "$VERS" in
     3*)
-        echo "Using $PYTHON version $VER"
+        echo "Using $PYTHON version $VERS"
         ;;
     *)
-        echo "$PYTHON version $VER not acceptable; trying python3"
+        echo "$PYTHON version $VERS not acceptable; trying python3"
         PYTHON=python3
         VERS=`$PYTHON --version | awk '{print $2}' 2>/dev/null`
         case "$VERS" in
             3*)
-                echo "Using $PYTHON version $VER"
+                echo "Using $PYTHON version $VERS"
                 ;;
             *)
                 echo "Unable to find python3; instant death"
