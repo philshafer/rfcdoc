@@ -4,3 +4,7 @@
 [submodule "submodules/xml2rfc"]
 	path = submodules/xml2rfc
 	url = https://github.com/oerdnj/xml2rfc
+[submodule "submodules/libslax"]
+	path = submodules/libslax
+	url = https://github.com/Juniper/libslax
+	branch = master
