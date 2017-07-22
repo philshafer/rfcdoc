@@ -1,0 +1,6 @@
+[submodule "submodules/pyang"]
+	path = submodules/pyang
+	url = https://github.com/mbj4668/pyang/
+[submodule "submodules/xml2rfc"]
+	path = submodules/xml2rfc
+	url = https://github.com/oerdnj/xml2rfc
