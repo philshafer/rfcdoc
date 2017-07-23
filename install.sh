@@ -1,12 +1,17 @@
 #!/bin/sh
 
+fail () {
+    echo "$@"
+    exit 1
+}
+
 TOP=`pwd`
 TOOLS="$TOP/tools"
 mkdir -p $TOOLS
 
-if -z "$TOOLSCRIPT"; then
+if [ -z "$TOOLSCRIPT" ]; then
     TOOLSCRIPT=$TOOLS/install.log
-    exec script $TOOLSCRIPT env TOOLSCRIPT=$TOOLSCRIPT "$0" "$@"
+    exec script $TOOLSCRIPT env "TOOLSCRIPT=$TOOLSCRIPT" /bin/sh "$0" "$@"
 fi
 
 echo "Current directory is $TOP"
@@ -30,8 +35,7 @@ case "$VERS" in
                 echo "Using $PYTHON version $VERS"
                 ;;
             *)
-                echo "Unable to find python3; instant death"
-                exit 1
+                fail "Unable to find python3; instant death"
                 ;;
         esac
         ;;
@@ -45,14 +49,23 @@ mkdir build
 cd build
 ../configure --prefix $TOOLS
 make && make install && make test
+if [ $? -ne 0 ]; then
+    fail "libslax build failed"
+fi
 
 echo "Installing xml2rfc ..."
 cd $TOP/submodules/xml2rfc
 $PYTHON setup.py install --user --install-scripts=$TOOLS/bin
+if [ $? -ne 0 ]; then
+    fail "xml2rfc build failed"
+fi
 
 echo "Installing pyang ..."
 cd $TOP/submodules/pyang
 $PYTHON setup.py install --user --install-scripts=$TOOLS/bin
+if [ $? -ne 0 ]; then
+    fail "pyang build failed"
+fi
 
 echo "Install complete"
 exit 0
