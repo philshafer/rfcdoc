@@ -22,7 +22,7 @@ echo "Downloading submodules (if needed) ... "
 git submodule update --init --recursive
 
 PYTHON=python
-VERS=`$PYTHON --version | awk '{print $2}' 2>/dev/null`
+VERS=`$PYTHON --version 2>&1 | awk '{print $2}'`
 
 case "$VERS" in
     3*)
