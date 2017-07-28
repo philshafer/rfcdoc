@@ -13,7 +13,7 @@ mkdir -p $TOOLS
 
 if [ -z "$TOOLSCRIPT" ]; then
     TOOLSCRIPT=$TOOLS/install.log
-    exec script $TOOLSCRIPT env "TOOLSCRIPT=$TOOLSCRIPT" /bin/sh "$0" "$@"
+    exec script $TOOLSCRIPT env "TOOLSCRIPT=$TOOLSCRIPT" /bin/sh install.sh "$@"
 fi
 
 echo "Current directory is $TOP"
