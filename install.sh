@@ -31,7 +31,7 @@ case "$VERS" in
     *)
         echo "$PYTHON version $VERS not acceptable; trying python3"
         PYTHON=python3
-        VERS=`$PYTHON --version | awk '{print $2}' 2>/dev/null`
+        VERS=`$PYTHON --version 2>&1 | awk '{print $2}'`
         case "$VERS" in
             3*)
                 echo "Using $PYTHON version $VERS"
