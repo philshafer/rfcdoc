@@ -113,4 +113,4 @@ new-tag: ${output}.txt
 
 update-rfcdoc:
 	@echo Updating rfcdoc ...
-	cd ${RFCDOC_BASE}; git update
+	cd ${RFCDOC_BASE}; git pull -v
