@@ -110,3 +110,7 @@ ${output}.html: ${draft} ${references_xml} ${trees} ${load} ${yang}
 new-tag: ${output}.txt
 	@echo Tagging with ${output}...
 	git tag ${output}
+
+update-rfcdoc:
+	@echo Updating rfcdoc ...
+	cd ${RFCDOC_BASE}; git update
