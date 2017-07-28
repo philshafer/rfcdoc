@@ -5,6 +5,8 @@ fail () {
     exit 1
 }
 
+cd `dirname $0`
+
 TOP=`pwd`
 TOOLS="$TOP/tools"
 mkdir -p $TOOLS
