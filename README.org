@@ -89,13 +89,16 @@ the deeper the heading.
 
 - "outline mode" has numerous functions for displaying and traversing
 these hierachies.  "org mode" is a super set of "outline mode" and can
-be used similarly.
+be used similarly.  See ^https://www.emacswiki.org/emacs/OutlineMode^
+and ^http://orgmode.org^ for details.
 
 - References can be make to URLs, anchors (headings), or external
 references.  A reference uses the convention of the target surrounded
-by up-hats, e.g.  "^target^".
+by up-hats, e.g.
+@"^target^".
 
-    The source of the Nile (^NILESOURCE^) was unknown (^NILEHISTORY^).
+    The source of the Nile (^NILESOURCE^) was
+    unknown (^NILEHISTORY^).
 
 - Headings can be used as the anchors.  An explicit anchor name can be
 provided by placing the name at the end of the heading line between
@@ -120,20 +123,20 @@ e.g. "Section 4.2.1".  To suppress the prefix, use dual uphats:
 - Paragraphs of text are separated by blank links, just like one types
 normally.
 
-    We are met on a great battlefield of that war.  We have come to
-    dedicate a portion of that field as a final resting place for
-    those who here gave their lives that that nation might live.
+  We are met on a great battlefield of that war.  We have come to
+  dedicate a portion of that field as a final resting place for
+  those who here gave their lives that that nation might live.
 
-    It is altogether fitting and proper that we should do this.  But
-    in a larger sense we can not dedicate -- we can not consecrate --
-    we can not hallow -- this ground.  The brave men living and dead
-    who struggled here have consecrated it far above our poor power to
-    add or detract.
+  It is altogether fitting and proper that we should do this.  But
+  in a larger sense we can not dedicate -- we can not consecrate --
+  we can not hallow -- this ground.  The brave men living and dead
+  who struggled here have consecrated it far above our poor power to
+  add or detract.
 
-    The world will little note nor long remember what we say here but
-    it can never forget what they did here.  It is for us the living
-    rather to be dedicated here to the unfinished work which they who
-    fought here have thus far so nobly advanced
+  The world will little note nor long remember what we say here but
+  it can never forget what they did here.  It is for us the living
+  rather to be dedicated here to the unfinished work which they who
+  fought here have thus far so nobly advanced
 
 **** Lists
 
@@ -188,7 +191,7 @@ filename using a line containing "!! include-figure":
 
 **** Tables
 
-- Use "org mode" tables.  See ^some-url^.
+- Use "org mode" tables.  See ^http://orgmode.org/guide/Tables.html^.
 - Tables start with a vertical bar ("|").
 - Table headers appear next, separated by vertical bars.
 - A separator line follows, containing vertical bars and plus signs.
@@ -237,8 +240,8 @@ is used for RFC header fields:
         category std;
         references back.xml;
         abbreviation YANG;
-        title "The YANG 1.1 Data Modeling Language";
-        contributor "editor:Martin Bjorklund:Tail-f Systems:mbj@tail-f.com";
+        title "The YANG 12.0 Data Modeling Language";
+        contributor "author:Joe Example:Example Inc:j@example.com";
         keyword NETCONF;
         keyword XML;
         keyword "data modeling";
@@ -381,7 +384,7 @@ the number of the draft, e.g. from "-00.txt" to "-01.txt".  We use a
 = clean
 Cleans all generated files from the directory.
 
-* How to Use these Tools @howto@
+* How to Use these Tools @how-to@
 
 This section contains the simple steps for building your RFC.  In
 these examples, replace MYNAME with your github login and MYDRAFT
@@ -406,9 +409,10 @@ the "Rename" button.
 
 = Clone the rfcexample repo
 On your laptop, make a local copy of the repo (aka "clone") by using
-the following command:
+the "git clone" command.  Note that the need the "--recursive" flag
+to ensure that the submodules rfcdoc uses are fully populated.
 
-    git clone https://github.com/MYNAME/MYDRAFT
+    git clone --recursive https://github.com/MYNAME/MYDRAFT
     cd MYDRAFT
 
 = Build the rfcdoc repo
@@ -428,7 +432,7 @@ Your repo has a copy of a document meant to help you get started,
 but you'll need to rename it before continuing:
 
     git mv rfcexample.org MYDRAFT.org
-    git add MYDRAFT.org
+    git commit -m 'Rename' MYDRAFT.org
     git push
 
 = Edit your Makefile
@@ -439,7 +443,8 @@ name of your input document, so it should be set to "MYDRAFT.org".
 The output_base is the basename of your output document, and that
 value will depend on the working group, status, and topic of your
 document.  For now, we'll use "draft-MYNAME-MYDRAFT".  The remaining
-variables should be empty:
+variables should be empty.  The last two lines of the file should not
+be changed, since they allow us to find your copy of rfcdoc.
 
     draft = MYDRAFT.org
     output_base = draft-MYNAME-MYDRAFT
@@ -447,8 +452,9 @@ variables should be empty:
     trees =
     std_yang =
     ex_yang =
-    references_src =
-    references_xml =
+
+    rfcdoc = rfcdoc
+    include ${rfcdoc}/rfcdoc.mk
 
 = Test the build
 To performa a test build, run "make".  It should make a fairly
@@ -460,3 +466,10 @@ Fix your README.md to contain proper and accurate information.
 = Start editing your draft
 Go on!  Get to work!
 
+{{document:
+    name ;
+    ipr noModificationTrust200811;
+    category info;
+    title "rfcdoc: tools for building RFC and Internet-Drafts";
+    contributor "author:Phil Shafer:Juniper Networks:phil@juniper.net";
+}}
