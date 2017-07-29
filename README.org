@@ -94,8 +94,7 @@ and ^http://orgmode.org^ for details.
 
 - References can be make to URLs, anchors (headings), or external
 references.  A reference uses the convention of the target surrounded
-by up-hats, e.g.
-@"^target^".
+by up-hats:
 
     The source of the Nile (^NILESOURCE^) was
     unknown (^NILEHISTORY^).
