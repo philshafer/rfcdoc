@@ -145,9 +145,14 @@ normally.
 A dash ("-") at the beginning of the line marks a symbol list item,
 where the item will be prefixed with a symbol.
 
+  Example::
+
    Favorite Things:
    - Raindrops on roses
    - Whiskers on kittens
+
+ Formatted output::
+
 
 Favorite Things:
 - Raindrops on roses
@@ -158,8 +163,12 @@ Favorite Things:
 An underscore ("_") at the beginning of the line marks an empty list
 item, where the item will not be prefixed with a symbol.
 
+  Example::
+
    _ Do not pass Go
    _ Do not collect $200
+
+ Formatted output::
 
 _ Do not pass Go
 _ Do not collect $200
@@ -169,12 +178,18 @@ _ Do not collect $200
 A plus sign ("+") at the beginning of the line marks a numbered list
 item, where the item is prefixed with an increasing number.
 
+ Example::
+
+   + The money
+   + The show
    + Get ready
-   + Get set
    + Go, Cat, Go!
 
+ Formatted output::
+
++ The money
++ The show
 + Get ready
-+ Get set
 + Go, Cat, Go!
 
 ***** Hanging Lists
@@ -183,12 +198,15 @@ An equals sign ("=") at the beginning of the line marks an hanging
 list item, where the rest of the line is the hang text and the
 following lines are the content.
 
+ Example::
    = 64-bit
    Machines that have 64-bit CPUs
    = 32-bit
    Machines that have 32-bit CPUs
    = 8-bit
    Machines that are really, really old
+
+ Formatted output::
 
 = 64-bit
 Machines that have 64-bit CPUs
@@ -216,7 +234,7 @@ filename:
 
    !! include-figure my.yang extract-to="my-@2017-04-01.yang"
 
-**** Tables
+**** Tables @fake-ref@
 
 oxtradoc using "org mode" tables.  These tables are simple, visually
 accurate, and can be automatically generated using Emacs tools.  See
@@ -229,7 +247,9 @@ The rules for these tables are fairly simple:
 - A separator line follows, containing vertical bars and plus signs.
 - Content follows, separated by vertical bars.
 - If a title is needed, the table is preceeded by a line containing
-  two dashes, the title, and an optional anchor:
+two dashes, the title, and an optional anchor:
+
+  Example::
 
     -- List of Sub-Statements @sub-list@
     | substatement | section         | cardinality |
@@ -239,13 +259,16 @@ The rules for these tables are fairly simple:
     | reference    | ^reference^     |        0..1 |
     | status       | ^status^        |        0..1 |
 
+
+  Formatted output::
+
 -- List of Sub-Statements @sub-list@
 | substatement | section         | cardinality |
 |--------------+-----------------+-------------|
-| argument     | ^extension-arg^ |        0..1 |
-| description  | ^description^   |        0..1 |
-| reference    | ^reference^     |        0..1 |
-| status       | ^status^        |        0..1 |
+| argument     | ^fake-ref^      |        0..1 |
+| description  | ^fake-ref^      |        0..1 |
+| reference    | ^fake-ref^      |        0..1 |
+| status       | ^fake-ref^      |        0..1 |
 
 **** Digressions
 
