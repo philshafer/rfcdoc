@@ -14,7 +14,7 @@ the same tools for various open source projects (libxo, libslax,
 juise).  The goals are simple:
 
 - Humans should never write XML; it's a fine language for machine
-  interchange, for making people write it directly is just mean.
+  interchange, for making people write it directly is just plain mean.
 - Text should be email friendly.  We all use email to talk/review,
   so having non-text formats make no sense.
 - There are existing text conventions (even twenty plus years ago when
@@ -50,8 +50,9 @@ that allows various output targets.
 
 *** make
 
-"make" is the glue that holds it all together.  The rfcdoc.mk spells
-out the dependencies and commands that get the tools invoked correctly.
+"make" is the glue that holds it all together.  The file "rfcdoc.mk"
+spells out the dependencies and commands that get the tools invoked
+correctly.
 
 There are "make" targets for producing the final documents, as well as
 checking the content of YANG modules and example data files.  "YANG
@@ -139,27 +140,46 @@ normally.
 
 **** Lists
 
-- A dash ("-") at the beginning of the line marks a symbol list item,
+***** Symbol Lists
+
+A dash ("-") at the beginning of the line marks a symbol list item,
 where the item will be prefixed with a symbol.
 
    Favorite Things:
    - Raindrops on roses
    - Whiskers on kittens
 
-- An underscore ("_") at the beginning of the line marks an empty list
+Favorite Things:
+- Raindrops on roses
+- Whiskers on kittens
+
+***** Empty Lists
+
+An underscore ("_") at the beginning of the line marks an empty list
 item, where the item will not be prefixed with a symbol.
 
    _ Do not pass Go
    _ Do not collect $200
 
-- A plus sign ("+") at the beginning of the line marks a numbered list
+_ Do not pass Go
+_ Do not collect $200
+
+***** Numbered Lists
+
+A plus sign ("+") at the beginning of the line marks a numbered list
 item, where the item is prefixed with an increasing number.
 
    + Get ready
    + Get set
    + Go, Cat, Go!
 
-- An equals sign ("=") at the beginning of the line marks an hanging
++ Get ready
++ Get set
++ Go, Cat, Go!
+
+***** Hanging Lists
+
+An equals sign ("=") at the beginning of the line marks an hanging
 list item, where the rest of the line is the hang text and the
 following lines are the content.
 
@@ -170,32 +190,48 @@ following lines are the content.
    = 8-bit
    Machines that are really, really old
 
+= 64-bit
+Machines that have 64-bit CPUs
+= 32-bit
+Machines that have 32-bit CPUs
+= 8-bit
+Machines that are really, really old
+
 **** Figures
 
-- Figures and ASCII art can be placed directly in the file by
+Figures and ASCII art can be placed directly in the file by
 indenting the text or artwork.
 
     +----+             +------+                +-------------+
     | me |-->(emacs)-->| text |-->(oxtradoc)-->|documentation|
     +----+             +------+                +-------------+
 
-- Figures can be placed in external files and included using the
+Figures can be placed in external files and included using the
 filename using a line containing "!! include-figure":
 
    !! include-figure ex-content.xml
 
-- Add an "extract-to" value to indicate a desired extraction filename:
+An "extract-to" value can be added to indicate a desired extraction
+filename: 
 
    !! include-figure my.yang extract-to="my-@2017-04-01.yang"
 
 **** Tables
 
-- Use "org mode" tables.  See ^http://orgmode.org/guide/Tables.html^.
+oxtradoc using "org mode" tables.  These tables are simple, visually
+accurate, and can be automatically generated using Emacs tools.  See
+^http://orgmode.org/guide/Tables.html^ for additional information.
+
+The rules for these tables are fairly simple:
+
 - Tables start with a vertical bar ("|").
 - Table headers appear next, separated by vertical bars.
 - A separator line follows, containing vertical bars and plus signs.
 - Content follows, separated by vertical bars.
+- If a title is needed, the table is preceeded by a line containing
+  two dashes, the title, and an optional anchor:
 
+    -- List of Sub-Statements @sub-list@
     | substatement | section         | cardinality |
     |--------------+-----------------+-------------|
     | argument     | ^extension-arg^ |        0..1 |
@@ -203,10 +239,13 @@ filename using a line containing "!! include-figure":
     | reference    | ^reference^     |        0..1 |
     | status       | ^status^        |        0..1 |
 
-- If a title is needed, the table is preceeded by a line containing
-  two dashes, the title, and an optional anchor:
-
-    -- List of Sub-Statements @sub-list@
+-- List of Sub-Statements @sub-list@
+| substatement | section         | cardinality |
+|--------------+-----------------+-------------|
+| argument     | ^extension-arg^ |        0..1 |
+| description  | ^description^   |        0..1 |
+| reference    | ^reference^     |        0..1 |
+| status       | ^status^        |        0..1 |
 
 **** Digressions
 
