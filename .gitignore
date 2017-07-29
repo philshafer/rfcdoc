@@ -1,3 +1,6 @@
 tools
 ltmain.sh
 *~
+draft-*[0-9][0-9].xml
+draft-*[0-9][0-9].txt
+references.xml
