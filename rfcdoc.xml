@@ -23,12 +23,17 @@
     <abstract>
         <t>
 This document describes a set of tools for formatting RFCs, Internet
-Drafts, and other documentation, collectively called &quot;rfcdoc&quot;.
+Drafts, and other documentation, collectively called &quot;rfcdoc&quot;.  These
+tools simplify the creation of documents by allowing authors to write
+in plain text files instead of hand-editing XML files.  Also files
+like YANG modules and example content files are kept in distinct files
+to allow validation of their content and allow editors to enable
+mode-specific features.  The files are then combined via commands
+triggered by &quot;make&quot; to generate complete RFCs and Internet-Drafts.
         </t>
 </abstract>
 </front>
 <middle>
-<section title="rfcdoc" anchor="rfcdoc">
 <section title="Introduction" anchor="introduction">
 <section title="History" anchor="history">
     <t>
@@ -108,9 +113,17 @@ useful drafts.
     </t>
 </section>
 </section>
-</section>
 <section title="The Tools" anchor="the-tools">
+    <t>
+This section contains more details and reference information on the
+tools, their syntax and operation.
+    </t>
 <section title="oxtradoc" anchor="oxtradoc-2">
+    <t>
+&quot;oxtradoc&quot; performs the translation from plain text into xml2rfc-style
+XML content.  Specific rules must be followed, but the text input is
+generally readable and simple to understand.
+    </t>
 <section title="Rules for Formatting" anchor="rules-for-formatting">
 <section title="Headings, References, and Outline/Org Mode" anchor="headings-references-and-outlineorg-mode">
     <t>
@@ -231,7 +244,76 @@ normally.
             ]]></artwork>
         </figure>
 </section>
+<section title="Preserved Content" anchor="preserved-content">
+    <t>
+Figures, XML, code, and ASCII art can be placed directly in the file
+by indenting the content.  When text is intended, the other rules of
+formatting are not applied.  While &quot;oxtradoc&quot; can detect the &quot;type&quot; of
+the content (in terms of XML, code, artwork, etc), any such content is
+wrapped in the xml2rfc &quot;figure&quot; and &quot;artwork&quot; tags, and is not
+formatted.
+    </t>
+    <t>
+Example:
+    </t>
+        <figure>
+            <artwork><![CDATA[
+    +----+             +------+                +-------------+
+    | me |-->(emacs)-->| text |-->(oxtradoc)-->|documentation|
+    +----+             +------+                +-------------+
+            ]]></artwork>
+        </figure>
+    <t>
+Example:
+    </t>
+        <figure>
+            <artwork><![CDATA[
+    <rpc>
+        <order-lunch>
+          <togo/>
+          <pizza>
+             <size><large/></size>
+             <topping><sausage/></topping>
+          </pizza>
+        </order-lunch>
+    </rpc>
+            ]]></artwork>
+        </figure>
+    <t>
+Note that there is no need to hand-escape less-than and greater-than
+characters; &quot;oxtradoc&quot; does this automatically.
+    </t>
+<section title="External Figures" anchor="external-figures">
+    <t>
+Figures can be placed in external files and included using the
+filename using a line containing &quot;!!include&#8209;figure&quot;:
+    </t>
+        <figure>
+            <artwork><![CDATA[
+   !!include-figure ex-content.xml
+            ]]></artwork>
+        </figure>
+    <t>
+An &quot;extract&#8209;to&quot; value can be added to indicate a desired extraction
+filename: 
+    </t>
+        <figure>
+            <artwork><![CDATA[
+   !!include-figure my.yang extract-to="my-@2017-04-01.yang"
+            ]]></artwork>
+        </figure>
+    <t>
+Putting such content in external files allows the content to be
+validated, as well as allowing text editors to apply mode-specific
+behaviors such as intentation or colored display.
+    </t>
+</section>
+</section>
 <section title="Lists" anchor="lists">
+    <t>
+&quot;oxtradoc&quot; supports a number of types of lists, based on simple text
+encoding conventions.
+    </t>
 <section title="Symbol Lists" anchor="symbol-lists">
     <t>
 A dash (&quot;&#8209;&quot;) at the beginning of the line marks a symbol list item,
@@ -267,7 +349,8 @@ Whiskers on kittens
 <section title="Empty Lists" anchor="empty-lists">
     <t>
 An underscore (&quot;_&quot;) at the beginning of the line marks an empty list
-item, where the item will not be prefixed with a symbol.
+item, where the item will not be prefixed with a symbol.  This allows
+the lines to be adjacent without being wrapped together.
     </t>
     <t>
 Example::
@@ -295,7 +378,7 @@ Do not collect $200
 <section title="Numbered Lists" anchor="numbered-lists">
     <t>
 A plus sign (&quot;+&quot;) at the beginning of the line marks a numbered list
-item, where the item is prefixed with an increasing number.
+item, where the item is prefixed with an increasing integer number.
     </t>
     <t>
 Example::
@@ -364,37 +447,6 @@ Machines that are really, really old
  </list>
 </t>
 </section>
-</section>
-<section title="Figures" anchor="figures">
-    <t>
-Figures and ASCII art can be placed directly in the file by
-indenting the text or artwork.
-    </t>
-        <figure>
-            <artwork><![CDATA[
-    +----+             +------+                +-------------+
-    | me |-->(emacs)-->| text |-->(oxtradoc)-->|documentation|
-    +----+             +------+                +-------------+
-            ]]></artwork>
-        </figure>
-    <t>
-Figures can be placed in external files and included using the
-filename using a line containing &quot;!! include-figure&quot;:
-    </t>
-        <figure>
-            <artwork><![CDATA[
-   !! include-figure ex-content.xml
-            ]]></artwork>
-        </figure>
-    <t>
-An &quot;extract&#8209;to&quot; value can be added to indicate a desired extraction
-filename: 
-    </t>
-        <figure>
-            <artwork><![CDATA[
-   !! include-figure my.yang extract-to="my-@2017-04-01.yang"
-            ]]></artwork>
-        </figure>
 </section>
 <section title="Tables" anchor="fake-ref">
     <t>
