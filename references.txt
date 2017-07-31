@@ -1,0 +1,6 @@
+{{references:
+    title "Informative References";
+    ietf-ref RFC2119;
+    ietf-ref RFC8174;
+#   ietf-ref I-D.ietf-some-new-draft;
+}}
