@@ -159,9 +159,9 @@ Internet-Draft                                                 July 2017
 2.1.1.1.  Headings, References, and Outline/Org Mode
 
    Emacs has a mode called "outline mode", which allows organization of
-   text.  Another mode called "org mode" extends this mode with
-   additional formatting conventions.  Refer to the documentation below:
-
+   text.  "outline mode" has numerous functions for displaying and
+   traversing these hierachies.  See https://www.emacswiki.org/emacs/
+   OutlineMode for details.
 
 
 
@@ -170,7 +170,9 @@ Shafer                  Expires February 1, 2018                [Page 3]
 Internet-Draft                                                 July 2017
 
 
-   https://somedocs-go-here
+   Another mode called "org mode" extends this mode with additional
+   formatting conventions.  "org mode" is a super set of "outline mode"
+   and can be used similarly.  See http://orgmode.org for details.
 
    o  Headings are in Emacs "outline mode", where heading depth is
       indicated a leading series of asterisks ("*").  The more
@@ -183,12 +185,6 @@ Internet-Draft                                                 July 2017
        ** Late History
        *** Missing History
        **** Dog Ate My History
-
-   o  "outline mode" has numerous functions for displaying and
-      traversing these hierachies.  "org mode" is a super set of
-      "outline mode" and can be used similarly.  See
-      https://www.emacswiki.org/emacs/OutlineMode and http://orgmode.org
-      for details.
 
    o  References can be make to URLs, anchors (headings), or external
       references.  A reference uses the convention of the target
@@ -218,6 +214,10 @@ Internet-Draft                                                 July 2017
       e.g.  "Section 4.2.1".  To suppress the prefix, use dual uphats:
 
        See sections ^^ref-one^^ and ^^ref-two^^.
+
+
+
+
 
 
 
@@ -451,7 +451,8 @@ Internet-Draft                                                 July 2017
 
 
    The "document" digression contains information about the document and
-   is used for RFC header fields:
+   is used for RFC header fields.  The contents of the digression are
+   name/value pairs on lines ending with semi-colons:
 
        {{document:
            ipr pre5378Trust200902;
@@ -497,7 +498,6 @@ Internet-Draft                                                 July 2017
    A "open question" digress is used to record an open question within
    the document for the benefit of the document authors.  The question
    should be resolved before publication.  An open question can be
-
 
 
 
@@ -593,8 +593,11 @@ Internet-Draft                                                 July 2017
 
    rfcdoc  Directory were the "rfcdoc" git module appears.
 
-   In this example Makefile, the "rfcdoc" git module is checked out in
-   the parent directory:
+   In this example Makefile, the user has written a draft named
+   "nmda-netconf.org", which is used to generate
+   "draft-dsdt-nmda-netconf-XX.txt".  A YANG module named
+   "ietf-netconf-datastores.yang" is included as part of the generated
+   file, and can be validated via the "make validate" command.
 
        draft = nmda-netconf.org
        output_base = draft-dsdt-nmda-netconf
@@ -602,12 +605,9 @@ Internet-Draft                                                 July 2017
        trees =
        std_yang = ietf-netconf-datastores.yang
        ex_yang =
-       references_src = references.txt
-       references_xml = references.xml
-       rfcdoc = ../rfcdoc
 
-
-
+       rfcdoc = rfcdoc
+       include ${rfcdoc}/rfcdoc.mk
 
 
 
@@ -617,6 +617,14 @@ Shafer                  Expires February 1, 2018               [Page 11]
 
 Internet-Draft                                                 July 2017
 
+
+   When working with multiple drafts, a common rfcdoc/ directory can be
+   shared, typically by cloning the "rfcdoc" project into the parent
+   directory, rather can forking the "rfcexample" project.  To use this
+   ../rfcdoc/ directory, set the rfcdoc variable to that path in your
+   Makefile:
+
+       rfcdoc = ../rfcdoc
 
 2.2.2.  Targets
 
@@ -657,14 +665,6 @@ Internet-Draft                                                 July 2017
 
    Rename the repo to something appropriate  Under "Settings", enter the
       new name for your repo, MYDRAFT.  If you want to use github to
-      track issues with your draft (a fine idea), the select "Issues"
-      under the "Features" list.  Then click on the "Rename" button.
-
-   Clone the rfcexample repo  On your laptop, make a local copy of the
-      repo (aka "clone") by using the "git clone" command.  Note that
-      the need the "--recursive" flag to ensure that the submodules
-      rfcdoc uses are fully populated.
-
 
 
 
@@ -673,6 +673,14 @@ Shafer                  Expires February 1, 2018               [Page 12]
 
 Internet-Draft                                                 July 2017
 
+
+      track issues with your draft (a fine idea), the select "Issues"
+      under the "Features" list.  Then click on the "Rename" button.
+
+   Clone the rfcexample repo  On your laptop, make a local copy of the
+      repo (aka "clone") by using the "git clone" command.  Note that
+      the need the "--recursive" flag to ensure that the submodules
+      rfcdoc uses are fully populated.
 
        git clone --recursive https://github.com/MYNAME/MYDRAFT
        cd MYDRAFT
@@ -708,6 +716,20 @@ Internet-Draft                                                 July 2017
       The last two lines of the file should not be changed, since they
       allow us to find your copy of rfcdoc.
 
+
+
+
+
+
+
+
+
+
+Shafer                  Expires February 1, 2018               [Page 13]
+
+Internet-Draft                                                 July 2017
+
+
        draft = MYDRAFT.org
        output_base = draft-MYNAME-MYDRAFT
        examples =
@@ -722,14 +744,6 @@ Internet-Draft                                                 July 2017
       a fairly meaningless document, but that should fill your eyes with
       pride.
 
-
-
-
-Shafer                  Expires February 1, 2018               [Page 13]
-
-Internet-Draft                                                 July 2017
-
-
    Edit your README.md  Fix your README.md to contain proper and
       accurate information.
 
@@ -741,20 +755,6 @@ Author's Address
    Juniper Networks
 
    Email: phil@juniper.net
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

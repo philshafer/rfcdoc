@@ -115,11 +115,15 @@ useful drafts.
 <section title="Headings, References, and Outline/Org Mode" anchor="headings-references-and-outlineorg-mode">
     <t>
 Emacs has a mode called &quot;outline mode&quot;, which allows organization of
-text.  Another mode called &quot;org mode&quot; extends this mode with
-additional formatting conventions.  Refer to the documentation below:
+text.  &quot;outline mode&quot; has numerous functions for displaying and
+traversing these hierachies.  See
+<eref target="https://www.emacswiki.org/emacs/OutlineMode">https://www.emacswiki.org/emacs/OutlineMode</eref> for details.
     </t>
-
-<t>    <eref target="https://somedocs-go-here">https://somedocs-go-here</eref></t>
+    <t>
+Another mode called &quot;org mode&quot; extends this mode with additional
+formatting conventions.  &quot;org mode&quot; is a super set of &quot;outline mode&quot;
+and can be used similarly.  See <eref target="http://orgmode.org">http://orgmode.org</eref> for details.
+    </t>
 <t>
  <list style="symbols">
  <t>
@@ -142,12 +146,6 @@ the deeper the heading.
         </figure>
 <t>
  <list style="symbols">
- <t>
-&quot;outline mode&quot; has numerous functions for displaying and traversing
-these hierachies.  &quot;org mode&quot; is a super set of &quot;outline mode&quot; and can
-be used similarly.  See <eref target="https://www.emacswiki.org/emacs/OutlineMode">https://www.emacswiki.org/emacs/OutlineMode</eref>
-and <eref target="http://orgmode.org">http://orgmode.org</eref> for details.
- </t>
  <t>
 References can be make to URLs, anchors (headings), or external
 references.  A reference uses the convention of the target surrounded
@@ -499,7 +497,8 @@ some of these fields.
         <?rfc compact="no"?>
     <t>
 The &quot;document&quot; digression contains information about the document and
-is used for RFC header fields:
+is used for RFC header fields.  The contents of the digression are
+name/value pairs on lines ending with semi-colons:
     </t>
         <figure>
             <artwork><![CDATA[
@@ -665,8 +664,11 @@ Directory were the &quot;rfcdoc&quot; git module appears.
  </list>
 </t>
     <t>
-In this example Makefile, the &quot;rfcdoc&quot; git module is checked out
-in the parent directory:
+In this example Makefile, the user has written a draft named
+&quot;nmda&#8209;netconf.org&quot;, which is used to generate
+&quot;draft&#8209;dsdt&#8209;nmda&#8209;netconf&#8209;XX.txt&quot;.  A YANG module named
+&quot;ietf&#8209;netconf&#8209;datastores.yang&quot; is included as part of the generated
+file, and can be validated via the &quot;make validate&quot; command.
     </t>
         <figure>
             <artwork><![CDATA[
@@ -676,8 +678,20 @@ in the parent directory:
     trees =
     std_yang = ietf-netconf-datastores.yang
     ex_yang =
-    references_src = references.txt
-    references_xml = references.xml
+
+    rfcdoc = rfcdoc
+    include ${rfcdoc}/rfcdoc.mk
+            ]]></artwork>
+        </figure>
+    <t>
+When working with multiple drafts, a common rfcdoc/ directory can be
+shared, typically by cloning the &quot;rfcdoc&quot; project into
+the parent directory, rather can forking the &quot;rfcexample&quot; project.
+To use this ../rfcdoc/ directory, set the rfcdoc variable
+to that path in your Makefile:
+    </t>
+        <figure>
+            <artwork><![CDATA[
     rfcdoc = ../rfcdoc
             ]]></artwork>
         </figure>
