@@ -4,3 +4,9 @@ ltmain.sh
 draft-*[0-9][0-9].xml
 draft-*[0-9][0-9].txt
 references.xml
+README.fxml
+draft-rfcdoc-documentation-00.html
+gh-pages
+rfcdoc.html
+rfcdoc.txt
+rfcdoc.xml
