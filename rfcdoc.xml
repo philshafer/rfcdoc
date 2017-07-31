@@ -239,17 +239,19 @@ normally.
 A dash (&quot;&#8209;&quot;) at the beginning of the line marks a symbol list item,
 where the item will be prefixed with a symbol.
     </t>
+    <t>
+Example::
+    </t>
         <figure>
             <artwork><![CDATA[
-  Example::
-
    Favorite Things:
    - Raindrops on roses
    - Whiskers on kittens
-
- Formatted output::
             ]]></artwork>
         </figure>
+    <t>
+Formatted output::
+    </t>
     <t>
 Favorite Things:
     </t>
@@ -269,16 +271,18 @@ Whiskers on kittens
 An underscore (&quot;_&quot;) at the beginning of the line marks an empty list
 item, where the item will not be prefixed with a symbol.
     </t>
+    <t>
+Example::
+    </t>
         <figure>
             <artwork><![CDATA[
-  Example::
-
    _ Do not pass Go
    _ Do not collect $200
-
- Formatted output::
             ]]></artwork>
         </figure>
+    <t>
+Formatted output::
+    </t>
 <t>
  <list style="empty">
  <t>
@@ -295,18 +299,20 @@ Do not collect $200
 A plus sign (&quot;+&quot;) at the beginning of the line marks a numbered list
 item, where the item is prefixed with an increasing number.
     </t>
+    <t>
+Example::
+    </t>
         <figure>
             <artwork><![CDATA[
- Example::
-
    + The money
    + The show
    + Get ready
    + Go, Cat, Go!
-
- Formatted output::
             ]]></artwork>
         </figure>
+    <t>
+Formatted output::
+    </t>
 <t>
  <list style="numbers">
  <t>
@@ -330,19 +336,22 @@ An equals sign (&quot;=&quot;) at the beginning of the line marks an hanging
 list item, where the rest of the line is the hang text and the
 following lines are the content.
     </t>
+    <t>
+Example::
+    </t>
         <figure>
             <artwork><![CDATA[
- Example::
    = 64-bit
    Machines that have 64-bit CPUs
    = 32-bit
    Machines that have 32-bit CPUs
    = 8-bit
    Machines that are really, really old
-
- Formatted output::
             ]]></artwork>
         </figure>
+    <t>
+Formatted output::
+    </t>
 <t>
  <list style="hanging">
         <t hangText="64-bit">
@@ -418,10 +427,11 @@ two dashes, the title, and an optional anchor:
  </t>
  </list>
 </t>
+    <t>
+Example::
+    </t>
         <figure>
             <artwork><![CDATA[
-  Example::
-
     -- List of Sub-Statements @sub-list@
     | substatement | section         | cardinality |
     |--------------+-----------------+-------------|
@@ -429,11 +439,11 @@ two dashes, the title, and an optional anchor:
     | description  | ^description^   |        0..1 |
     | reference    | ^reference^     |        0..1 |
     | status       | ^status^        |        0..1 |
-
-
-  Formatted output::
             ]]></artwork>
         </figure>
+    <t>
+Formatted output::
+    </t>
 <?rfc compact="yes"?>
 <texttable anchor="sub-list" title="List of Sub-Statements">
 <ttcol align='left'>substatement</ttcol>

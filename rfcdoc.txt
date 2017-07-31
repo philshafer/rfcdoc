@@ -70,7 +70,7 @@ Table of Contents
    2.  The Tools . . . . . . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  oxtradoc  . . . . . . . . . . . . . . . . . . . . . . . .   3
        2.1.1.  Rules for Formatting  . . . . . . . . . . . . . . . .   3
-       2.1.2.  Additional Notes  . . . . . . . . . . . . . . . . . .  11
+       2.1.2.  Additional Notes  . . . . . . . . . . . . . . . . . .  10
      2.2.  Makefile  . . . . . . . . . . . . . . . . . . . . . . . .  11
        2.2.1.  Contents  . . . . . . . . . . . . . . . . . . . . . .  11
        2.2.2.  Targets . . . . . . . . . . . . . . . . . . . . . . .  12
@@ -253,13 +253,13 @@ Internet-Draft                                                 July 2017
    A dash ("-") at the beginning of the line marks a symbol list item,
    where the item will be prefixed with a symbol.
 
-     Example::
+   Example::
 
       Favorite Things:
       - Raindrops on roses
       - Whiskers on kittens
 
-    Formatted output::
+   Formatted output::
 
    Favorite Things:
 
@@ -272,7 +272,7 @@ Internet-Draft                                                 July 2017
    An underscore ("_") at the beginning of the line marks an empty list
    item, where the item will not be prefixed with a symbol.
 
-
+   Example::
 
 
 
@@ -282,12 +282,10 @@ Shafer                  Expires February 1, 2018                [Page 5]
 Internet-Draft                                                 July 2017
 
 
-     Example::
-
       _ Do not pass Go
       _ Do not collect $200
 
-    Formatted output::
+   Formatted output::
 
       Do not pass Go
 
@@ -298,14 +296,14 @@ Internet-Draft                                                 July 2017
    A plus sign ("+") at the beginning of the line marks a numbered list
    item, where the item is prefixed with an increasing number.
 
-    Example::
+   Example::
 
       + The money
       + The show
       + Get ready
       + Go, Cat, Go!
 
-    Formatted output::
+   Formatted output::
 
    1.  The money
 
@@ -321,7 +319,8 @@ Internet-Draft                                                 July 2017
    list item, where the rest of the line is the hang text and the
    following lines are the content.
 
-    Example::
+   Example::
+
       = 64-bit
       Machines that have 64-bit CPUs
       = 32-bit
@@ -329,7 +328,8 @@ Internet-Draft                                                 July 2017
       = 8-bit
       Machines that are really, really old
 
-    Formatted output::
+   Formatted output::
+
 
 
 
@@ -382,7 +382,7 @@ Internet-Draft                                                 July 2017
    o  If a title is needed, the table is preceeded by a line containing
       two dashes, the title, and an optional anchor:
 
-
+   Example::
 
 
 
@@ -394,8 +394,6 @@ Shafer                  Expires February 1, 2018                [Page 7]
 Internet-Draft                                                 July 2017
 
 
-     Example::
-
        -- List of Sub-Statements @sub-list@
        | substatement | section         | cardinality |
        |--------------+-----------------+-------------|
@@ -404,8 +402,7 @@ Internet-Draft                                                 July 2017
        | reference    | ^reference^     |        0..1 |
        | status       | ^status^        |        0..1 |
 
-
-     Formatted output::
+   Formatted output::
 
              +--------------+-----------------+-------------+
              | substatement | section         | cardinality |
@@ -438,9 +435,12 @@ Internet-Draft                                                 July 2017
 
 2.1.1.6.1.  Document Digressions
 
-
-
-
+   +-------------------------------------------------------------------+
+   | Open Question                                                     |
+   +-------------------------------------------------------------------+
+   | Note that this needs to be updated for RFC7991, which deprecates  |
+   | some of these fields.                                             |
+   +-------------------------------------------------------------------+
 
 
 
@@ -449,13 +449,6 @@ Shafer                  Expires February 1, 2018                [Page 8]
 
 Internet-Draft                                                 July 2017
 
-
-   +-------------------------------------------------------------------+
-   | Open Question                                                     |
-   +-------------------------------------------------------------------+
-   | Note that this needs to be updated for RFC7991, which deprecates  |
-   | some of these fields.                                             |
-   +-------------------------------------------------------------------+
 
    The "document" digression contains information about the document and
    is used for RFC header fields:
@@ -499,6 +492,13 @@ Internet-Draft                                                 July 2017
    keyword  Keywords for the document, suitable for rfc/front/keyword.
       This line may appear multiple times to supply a set of keywords.
 
+2.1.1.6.2.  Open Question Digressions
+
+   A "open question" digress is used to record an open question within
+   the document for the benefit of the document authors.  The question
+   should be resolved before publication.  An open question can be
+
+
 
 
 Shafer                  Expires February 1, 2018                [Page 9]
@@ -506,11 +506,6 @@ Shafer                  Expires February 1, 2018                [Page 9]
 Internet-Draft                                                 July 2017
 
 
-2.1.1.6.2.  Open Question Digressions
-
-   A "open question" digress is used to record an open question within
-   the document for the benefit of the document authors.  The question
-   should be resolved before publication.  An open question can be
    entered using a "question" digression, or may appear in a line that
    starts with a question mark.
 
@@ -550,6 +545,11 @@ Internet-Draft                                                 July 2017
       processing or for allowing pre-formatted content.  Consider it as
       an option of last resort.
 
+2.1.2.  Additional Notes
+
+   Since github.com supports "org mode" rendering of ".org" files,
+   naming your file with a ".org" extension means automatic rendering of
+   a subset of oxtradoc features in the github display.
 
 
 
@@ -561,12 +561,6 @@ Shafer                  Expires February 1, 2018               [Page 10]
 
 Internet-Draft                                                 July 2017
 
-
-2.1.2.  Additional Notes
-
-   Since github.com supports "org mode" rendering of ".org" files,
-   naming your file with a ".org" extension means automatic rendering of
-   a subset of oxtradoc features in the github display.
 
 2.2.  Makefile
 
@@ -602,9 +596,15 @@ Internet-Draft                                                 July 2017
    In this example Makefile, the "rfcdoc" git module is checked out in
    the parent directory:
 
-
-
-
+       draft = nmda-netconf.org
+       output_base = draft-dsdt-nmda-netconf
+       examples =
+       trees =
+       std_yang = ietf-netconf-datastores.yang
+       ex_yang =
+       references_src = references.txt
+       references_xml = references.xml
+       rfcdoc = ../rfcdoc
 
 
 
@@ -617,16 +617,6 @@ Shafer                  Expires February 1, 2018               [Page 11]
 
 Internet-Draft                                                 July 2017
 
-
-       draft = nmda-netconf.org
-       output_base = draft-dsdt-nmda-netconf
-       examples =
-       trees =
-       std_yang = ietf-netconf-datastores.yang
-       ex_yang =
-       references_src = references.txt
-       references_xml = references.xml
-       rfcdoc = ../rfcdoc
 
 2.2.2.  Targets
 
@@ -665,15 +655,6 @@ Internet-Draft                                                 July 2017
    Fork the rfcexample repo  Visit the https://github.com/philshafer/
       rfcexample and click on the "Fork" button in the upper right.
 
-
-
-
-
-Shafer                  Expires February 1, 2018               [Page 12]
-
-Internet-Draft                                                 July 2017
-
-
    Rename the repo to something appropriate  Under "Settings", enter the
       new name for your repo, MYDRAFT.  If you want to use github to
       track issues with your draft (a fine idea), the select "Issues"
@@ -683,6 +664,15 @@ Internet-Draft                                                 July 2017
       repo (aka "clone") by using the "git clone" command.  Note that
       the need the "--recursive" flag to ensure that the submodules
       rfcdoc uses are fully populated.
+
+
+
+
+
+Shafer                  Expires February 1, 2018               [Page 12]
+
+Internet-Draft                                                 July 2017
+
 
        git clone --recursive https://github.com/MYNAME/MYDRAFT
        cd MYDRAFT
@@ -718,18 +708,6 @@ Internet-Draft                                                 July 2017
       The last two lines of the file should not be changed, since they
       allow us to find your copy of rfcdoc.
 
-
-
-
-
-
-
-
-Shafer                  Expires February 1, 2018               [Page 13]
-
-Internet-Draft                                                 July 2017
-
-
        draft = MYDRAFT.org
        output_base = draft-MYNAME-MYDRAFT
        examples =
@@ -744,6 +722,14 @@ Internet-Draft                                                 July 2017
       a fairly meaningless document, but that should fill your eyes with
       pride.
 
+
+
+
+Shafer                  Expires February 1, 2018               [Page 13]
+
+Internet-Draft                                                 July 2017
+
+
    Edit your README.md  Fix your README.md to contain proper and
       accurate information.
 
@@ -755,6 +741,20 @@ Author's Address
    Juniper Networks
 
    Email: phil@juniper.net
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
