@@ -21984,8 +21984,8 @@ jQuery(function ($) {
 <link rel="Author" href="#rfc.authors">
 <link rel="Copyright" href="#rfc.copyright">
 <link rel="Chapter" title="1 Introduction" href="#rfc_section_1">
-<link rel="Chapter" title="2 oxtradoc" href="#rfc_section_2">
-<link rel="Chapter" title="3 rfcdoc and rfcexample" href="#rfc_section_3">
+<link rel="Chapter" title='2 The "oxtradoc" Tool' href="#rfc_section_2">
+<link rel="Chapter" title='3 "rfcdoc" and "rfcexample"' href="#rfc_section_3">
 <link rel="Chapter" title="4 How to Use these Tools" href="#rfc_section_4">
 <meta name="generator" content="http://greenbytes.de/tech/webdav/rfc2629.xslt, Revision 1.389, 2008-08-20 14:21:35, XSLT vendor: libxslt http://xmlsoft.org/XSLT/">
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
@@ -22040,29 +22040,25 @@ jQuery(function ($) {
 <a href="#introduction">Introduction</a><ul class="toc top-toc">
 <li class="tocline1">
 <div class="section-number" id="toc_rfc_section_1_1">1.1   </div>
-<a href="#history">History</a>
-</li>
-<li class="tocline1">
-<div class="section-number" id="toc_rfc_section_1_2">1.2   </div>
 <a href="#oxtradoc">oxtradoc</a>
 </li>
 <li class="tocline1">
-<div class="section-number" id="toc_rfc_section_1_3">1.3   </div>
+<div class="section-number" id="toc_rfc_section_1_2">1.2   </div>
 <a href="#xml2rfc">xml2rfc</a>
 </li>
 <li class="tocline1">
-<div class="section-number" id="toc_rfc_section_1_4">1.4   </div>
+<div class="section-number" id="toc_rfc_section_1_3">1.3   </div>
 <a href="#pyang">pyang</a>
 </li>
 <li class="tocline1">
-<div class="section-number" id="toc_rfc_section_1_5">1.5   </div>
+<div class="section-number" id="toc_rfc_section_1_4">1.4   </div>
 <a href="#make">make</a>
 </li>
 </ul>
 </li>
 <li class="tocline0">
 <div class="section-number" id="toc_rfc_section_2">2   </div>
-<a href="#oxtradoc-2">oxtradoc</a><ul class="toc top-toc">
+<a href="#the-oxtradoc-tool">The "oxtradoc" Tool</a><ul class="toc top-toc">
 <li class="tocline1">
 <div class="section-number" id="toc_rfc_section_2_1">2.1   </div>
 <a href="#rules-for-formatting">Rules for Formatting</a><ul class="toc">
@@ -22137,7 +22133,7 @@ jQuery(function ($) {
 </li>
 <li class="tocline0">
 <div class="section-number" id="toc_rfc_section_3">3   </div>
-<a href="#rfcdoc-and-rfcexample">rfcdoc and rfcexample</a><ul class="toc top-toc">
+<a href="#rfcdoc-and-rfcexample">"rfcdoc" and "rfcexample"</a><ul class="toc top-toc">
 <li class="tocline1">
 <div class="section-number" id="toc_rfc_section_3_1">3.1   </div>
 <a href="#makefile-variables">Makefile Variables</a>
@@ -22163,68 +22159,60 @@ jQuery(function ($) {
 <a href="#rfc_section_1">1_</a> </div>
 <a id="introduction" href="#introduction">Introduction</a>
 </h1>
-<p id="rfc_section_1_p_1">Section Contents: </p>
-<ul>
-<li><a href="#history" title="History">Section 1.1</a></li>
-<li><a href="#oxtradoc" title="oxtradoc">Section 1.2</a></li>
-<li><a href="#xml2rfc" title="xml2rfc">Section 1.3</a></li>
-<li><a href="#pyang" title="pyang">Section 1.4</a></li>
-<li><a href="#make" title="make">Section 1.5</a></li>
-</ul>
-<div class="content">
-<h2 id="rfc_section_1_1">
-<div class="self-section-number">
-<a href="#rfc_section_1_1">1.1</a> </div>
-<a id="history" href="#history">History</a>
-</h2>
-<p id="rfc_section_1_1_p_1">In the NETCONF/NETMOD working groups, we've been using some simple tools to ease the production of Internet Drafts and RFCs. I use the same tools for various open source projects (libxo, libslax, juise). The goals are simple:</p>
-<p id="rfc_section_1_1_p_2"> </p>
+<p id="rfc_section_1_p_1">In the NETCONF/NETMOD working groups, we've been using some simple tools to ease the production of Internet Drafts and RFCs. I use the same tools for various open source projects (libxo, libslax, juise). The goals are simple:</p>
+<p id="rfc_section_1_p_2"> </p>
 <ul>
 <li>Humans should never write XML; it's a fine language for machine interchange, for making people write it directly is just plain mean.</li>
 <li>Text should be email friendly. We all use email to talk/review, so having non-text formats make no sense.</li>
 <li>There are existing text conventions (even twenty plus years ago when I first wrote these tools) to allow semantic formatting.</li>
 <li>When they aren't, we can roll-our-own easily enough.</li>
 </ul>
-<p id="rfc_section_1_1_p_3">With those simple goals, let me introduce our tools.</p>
-<p id="rfc_section_1_1_p_4">If you lack the patience to weed through all these details, feel free to skip directly to the "how to" instructions locatated in <a href="#how-to" title="How to Use these Tools">Section 4</a>.</p>
+<p id="rfc_section_1_p_3">With those simple goals, let me introduce our tools.</p>
+<p id="rfc_section_1_p_4">If you lack the patience to weed through all these details, feel free to skip directly to the "how to" instructions locatated in <a href="#how-to" title="How to Use these Tools">Section 4</a>.</p>
+<p id="rfc_section_1_p_5">Section Contents: </p>
+<ul>
+<li><a href="#oxtradoc" title="oxtradoc">Section 1.1</a></li>
+<li><a href="#xml2rfc" title="xml2rfc">Section 1.2</a></li>
+<li><a href="#pyang" title="pyang">Section 1.3</a></li>
+<li><a href="#make" title="make">Section 1.4</a></li>
+</ul>
+<div class="content">
+<h2 id="rfc_section_1_1">
+<div class="self-section-number">
+<a href="#rfc_section_1_1">1.1</a> </div>
+<a id="oxtradoc" href="#oxtradoc">oxtradoc</a>
+</h2>
+<p id="rfc_section_1_1_p_1">"oxtradoc" is the main tool, which turns text into "xml2rfc"-style XML content. "oxtradoc" stands for "outputs xml to rfc and documentation". Not the best name, but at least I didn't call it "doccer".</p>
+<p id="rfc_section_1_1_p_2">Full documentation on oxtradoc's formatting features is available in <a href="#oxtradoc" title="oxtradoc">Section 1.1</a>.</p>
 </div>
 <div class="content">
 <h2 id="rfc_section_1_2">
 <div class="self-section-number">
 <a href="#rfc_section_1_2">1.2</a> </div>
-<a id="oxtradoc" href="#oxtradoc">oxtradoc</a>
+<a id="xml2rfc" href="#xml2rfc">xml2rfc</a>
 </h2>
-<p id="rfc_section_1_2_p_1">"oxtradoc" is the main tool, which turns text into "xml2rfc"-style XML content. "oxtradoc" stands for "outputs xml to rfc and documentation". Not the best name, but at least I didn't call it "doccer".</p>
-<p id="rfc_section_1_2_p_2">Full documentation on oxtradoc's formatting features is available in <a href="#oxtradoc" title="oxtradoc">Section 1.2</a>.</p>
+<p id="rfc_section_1_2_p_1">"xml2rfc" is a python script that turns XML of a certain format into RFC-style text. It's very good at what it does and I'm so glad I didn't have to write it.</p>
+<p id="rfc_section_1_2_p_2">By far the most pertinent fact about xml2rfc here is that we don't ever need to hand-write XML content for it. It is used to process XML generated by oxtradoc. See also:</p>
+<p id="rfc_section_1_2_p_3">https://pypi.python.org/pypi/xml2rfc https://xml2rfc.tools.ietf.org/public/rfc/html/rfc2629.html</p>
 </div>
 <div class="content">
 <h2 id="rfc_section_1_3">
 <div class="self-section-number">
 <a href="#rfc_section_1_3">1.3</a> </div>
-<a id="xml2rfc" href="#xml2rfc">xml2rfc</a>
+<a id="pyang" href="#pyang">pyang</a>
 </h2>
-<p id="rfc_section_1_3_p_1">"xml2rfc" is a python script that turns XML of a certain format into RFC-style text. It's very good at what it does and I'm so glad I didn't have to write it.</p>
-<p id="rfc_section_1_3_p_2">By far the most pertinent fact about xml2rfc here is that we don't ever need to hand-write XML content for it. It is used to process XML generated by oxtradoc. See also:</p>
-<p id="rfc_section_1_3_p_3">https://pypi.python.org/pypi/xml2rfc https://xml2rfc.tools.ietf.org/public/rfc/html/rfc2629.html</p>
+<p id="rfc_section_1_3_p_1">Everyone's favorite open-source YANG compiler, with a plug-in facility that allows various output targets. For details, see the following link:</p>
+<p id="rfc_section_1_3_p_2">https://github.com/mbj4668/pyang</p>
 </div>
 <div class="content">
 <h2 id="rfc_section_1_4">
 <div class="self-section-number">
 <a href="#rfc_section_1_4">1.4</a> </div>
-<a id="pyang" href="#pyang">pyang</a>
-</h2>
-<p id="rfc_section_1_4_p_1">Everyone's favorite open-source YANG compiler, with a plug-in facility that allows various output targets. For details, see the following link:</p>
-<p id="rfc_section_1_4_p_2">https://github.com/mbj4668/pyang</p>
-</div>
-<div class="content">
-<h2 id="rfc_section_1_5">
-<div class="self-section-number">
-<a href="#rfc_section_1_5">1.5</a> </div>
 <a id="make" href="#make">make</a>
 </h2>
-<p id="rfc_section_1_5_p_1">"make" is the glue that holds it all together. The file "rfcdoc.mk" spells out the dependencies and commands that get the tools invoked correctly.</p>
-<p id="rfc_section_1_5_p_2">There are "make" targets for producing the final documents, as well as checking the content of YANG modules and example data files. "YANG tree" files can also be automatically generated.</p>
-<p id="rfc_section_1_5_p_3">Together these tools allow RFC authors to simplify their workload, be more productive, make fewer mistakes, and generate more accurate and useful drafts.</p>
+<p id="rfc_section_1_4_p_1">"make" is the glue that holds it all together. The file "rfcdoc.mk" spells out the dependencies and commands that get the tools invoked correctly.</p>
+<p id="rfc_section_1_4_p_2">There are "make" targets for producing the final documents, as well as checking the content of YANG modules and example data files. "YANG tree" files can also be automatically generated.</p>
+<p id="rfc_section_1_4_p_3">Together these tools allow RFC authors to simplify their workload, be more productive, make fewer mistakes, and generate more accurate and useful drafts.</p>
 </div>
 </div>
 <hr class="noprint">
@@ -22232,7 +22220,7 @@ jQuery(function ($) {
 <h1 id="rfc_section_2" class="np">
 <div class="self-section-number">
 <a href="#rfc_section_2">2_</a> </div>
-<a id="oxtradoc-2" href="#oxtradoc-2">oxtradoc</a>
+<a id="the-oxtradoc-tool" href="#the-oxtradoc-tool">The "oxtradoc" Tool</a>
 </h1>
 <p id="rfc_section_2_p_1">"oxtradoc" performs the translation from plain text into xml2rfc-style XML content. Specific rules must be followed, but the text input is generally readable and simple to understand.</p>
 <p id="rfc_section_2_p_2">Section Contents: </p>
@@ -22632,7 +22620,7 @@ jQuery(function ($) {
 <a href="#rfc_section_2_2">2.2</a> </div>
 <a id="additional-notes" href="#additional-notes">Additional Notes</a>
 </h2>
-<p id="rfc_section_2_2_p_1">Since github.com supports "org mode" rendering of ".org" files, naming your file with a ".org" extension means automatic rendering of a subset of oxtradoc features in the github display.</p>
+<p id="rfc_section_2_2_p_1">Since github.com supports "org mode" rendering of ".org" files, naming your file with a ".org" extension means automatic rendering of a subset of oxtradoc features in the github file display.</p>
 </div>
 </div>
 <hr class="noprint">
@@ -22640,7 +22628,7 @@ jQuery(function ($) {
 <h1 id="rfc_section_3" class="np">
 <div class="self-section-number">
 <a href="#rfc_section_3">3_</a> </div>
-<a id="rfcdoc-and-rfcexample" href="#rfcdoc-and-rfcexample">rfcdoc and rfcexample</a>
+<a id="rfcdoc-and-rfcexample" href="#rfcdoc-and-rfcexample">"rfcdoc" and "rfcexample"</a>
 </h1>
 <p id="rfc_section_3_p_1">This project consists of two github repositories. The first ("rfcdoc") contains the captive versions of the tools used (oxtradoc, pyang, xml2rfc) and a small .mk file that simplifies using the tools.</p>
 <p id="rfc_section_3_p_2">The second ("rfcexample") is a fork-friendly repository that simplifies the use of rfcdoc by allowing the user to fork that repo and immediately start using the tools. Use of "rfcdoc" is not tied to "rfcexample", but it might be easier for beginners.</p>

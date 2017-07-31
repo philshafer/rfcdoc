@@ -68,12 +68,11 @@ Internet-Draft                                                 July 2017
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  History . . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.2.  oxtradoc  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.3.  xml2rfc . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.4.  pyang . . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.5.  make  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
-   2.  oxtradoc  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
+     1.1.  oxtradoc  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.2.  xml2rfc . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.3.  pyang . . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.4.  make  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  The "oxtradoc" Tool . . . . . . . . . . . . . . . . . . . . .   4
      2.1.  Rules for Formatting  . . . . . . . . . . . . . . . . . .   4
        2.1.1.  Headings, References, and Outline/Org Mode  . . . . .   4
        2.1.2.  Paragraphs  . . . . . . . . . . . . . . . . . . . . .   5
@@ -82,16 +81,14 @@ Table of Contents
        2.1.5.  Tables  . . . . . . . . . . . . . . . . . . . . . . .   8
        2.1.6.  Digressions . . . . . . . . . . . . . . . . . . . . .   9
        2.1.7.  Additional Formatting . . . . . . . . . . . . . . . .  11
-     2.2.  Additional Notes  . . . . . . . . . . . . . . . . . . . .  12
-   3.  rfcdoc and rfcexample . . . . . . . . . . . . . . . . . . . .  12
+     2.2.  Additional Notes  . . . . . . . . . . . . . . . . . . . .  11
+   3.  "rfcdoc" and "rfcexample" . . . . . . . . . . . . . . . . . .  12
      3.1.  Makefile Variables  . . . . . . . . . . . . . . . . . . .  12
      3.2.  Makefile Targets  . . . . . . . . . . . . . . . . . . . .  13
-   4.  How to Use these Tools  . . . . . . . . . . . . . . . . . . .  14
+   4.  How to Use these Tools  . . . . . . . . . . . . . . . . . . .  13
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  15
 
 1.  Introduction
-
-1.1.  History
 
    In the NETCONF/NETMOD working groups, we've been using some simple
    tools to ease the production of Internet Drafts and RFCs.  I use the
@@ -105,7 +102,10 @@ Table of Contents
    o  Text should be email friendly.  We all use email to talk/review,
       so having non-text formats make no sense.
 
+   o  There are existing text conventions (even twenty plus years ago
+      when I first wrote these tools) to allow semantic formatting.
 
+   o  When they aren't, we can roll-our-own easily enough.
 
 
 
@@ -114,17 +114,12 @@ Shafer                  Expires February 1, 2018                [Page 2]
 Internet-Draft                                                 July 2017
 
 
-   o  There are existing text conventions (even twenty plus years ago
-      when I first wrote these tools) to allow semantic formatting.
-
-   o  When they aren't, we can roll-our-own easily enough.
-
    With those simple goals, let me introduce our tools.
 
    If you lack the patience to weed through all these details, feel free
    to skip directly to the "how to" instructions locatated in Section 4.
 
-1.2.  oxtradoc
+1.1.  oxtradoc
 
    "oxtradoc" is the main tool, which turns text into "xml2rfc"-style
    XML content.  "oxtradoc" stands for "outputs xml to rfc and
@@ -132,9 +127,9 @@ Internet-Draft                                                 July 2017
    "doccer".
 
    Full documentation on oxtradoc's formatting features is available in
-   Section 1.2.
+   Section 1.1.
 
-1.3.  xml2rfc
+1.2.  xml2rfc
 
    "xml2rfc" is a python script that turns XML of a certain format into
    RFC-style text.  It's very good at what it does and I'm so glad I
@@ -147,7 +142,7 @@ Internet-Draft                                                 July 2017
    https://pypi.python.org/pypi/xml2rfc
    https://xml2rfc.tools.ietf.org/public/rfc/html/rfc2629.html
 
-1.4.  pyang
+1.3.  pyang
 
    Everyone's favorite open-source YANG compiler, with a plug-in
    facility that allows various output targets.  For details, see the
@@ -155,11 +150,16 @@ Internet-Draft                                                 July 2017
 
    https://github.com/mbj4668/pyang
 
-1.5.  make
+1.4.  make
 
    "make" is the glue that holds it all together.  The file "rfcdoc.mk"
    spells out the dependencies and commands that get the tools invoked
    correctly.
+
+   There are "make" targets for producing the final documents, as well
+   as checking the content of YANG modules and example data files.
+   "YANG tree" files can also be automatically generated.
+
 
 
 
@@ -170,15 +170,11 @@ Shafer                  Expires February 1, 2018                [Page 3]
 Internet-Draft                                                 July 2017
 
 
-   There are "make" targets for producing the final documents, as well
-   as checking the content of YANG modules and example data files.
-   "YANG tree" files can also be automatically generated.
-
    Together these tools allow RFC authors to simplify their workload, be
    more productive, make fewer mistakes, and generate more accurate and
    useful drafts.
 
-2.  oxtradoc
+2.  The "oxtradoc" Tool
 
    "oxtradoc" performs the translation from plain text into xml2rfc-
    style XML content.  Specific rules must be followed, but the text
@@ -216,7 +212,11 @@ Internet-Draft                                                 July 2017
        The source of the Nile (^NILESOURCE^) was
        unknown (^NILEHISTORY^).
 
+   o  Headings can be used as the anchors.  An explicit anchor name can
+      be provided by placing the name at the end of the heading line
+      between "at" signs ("@"), e.g. "@anchor-name@".
 
+       *** Possible Sources of the Nile @NILESOURCE@
 
 
 
@@ -225,12 +225,6 @@ Shafer                  Expires February 1, 2018                [Page 4]
 
 Internet-Draft                                                 July 2017
 
-
-   o  Headings can be used as the anchors.  An explicit anchor name can
-      be provided by placing the name at the end of the heading line
-      between "at" signs ("@"), e.g. "@anchor-name@".
-
-       *** Possible Sources of the Nile @NILESOURCE@
 
    o  If no explicit name is given, the anchor name will be the heading
       content with the following conversions:
@@ -274,6 +268,12 @@ Internet-Draft                                                 July 2017
    by indenting the content.  When text is intended, the other rules of
    formatting are not applied.  While "oxtradoc" can detect the "type"
    of the content (in terms of XML, code, artwork, etc), any such
+   content is wrapped in the xml2rfc "figure" and "artwork" tags, and is
+   not formatted.
+
+   Example:
+
+
 
 
 
@@ -281,11 +281,6 @@ Shafer                  Expires February 1, 2018                [Page 5]
 
 Internet-Draft                                                 July 2017
 
-
-   content is wrapped in the xml2rfc "figure" and "artwork" tags, and is
-   not formatted.
-
-   Example:
 
        +----+             +------+                +-------------+
        | me |-->(emacs)-->| text |-->(oxtradoc)-->|documentation|
@@ -327,7 +322,12 @@ Internet-Draft                                                 July 2017
    "oxtradoc" supports a number of types of lists, based on simple text
    encoding conventions.
 
+2.1.4.1.  Symbol Lists
 
+   A dash ("-") at the beginning of the line marks a symbol list item,
+   where the item will be prefixed with a symbol.
+
+   Example::
 
 
 
@@ -337,13 +337,6 @@ Shafer                  Expires February 1, 2018                [Page 6]
 
 Internet-Draft                                                 July 2017
 
-
-2.1.4.1.  Symbol Lists
-
-   A dash ("-") at the beginning of the line marks a symbol list item,
-   where the item will be prefixed with a symbol.
-
-   Example::
 
       Favorite Things:
       - Raindrops on roses
@@ -386,14 +379,6 @@ Internet-Draft                                                 July 2017
       + Get ready
       + Go, Cat, Go!
 
-
-
-
-Shafer                  Expires February 1, 2018                [Page 7]
-
-Internet-Draft                                                 July 2017
-
-
    Formatted output::
 
    1.  The money
@@ -401,6 +386,13 @@ Internet-Draft                                                 July 2017
    2.  The show
 
    3.  Get ready
+
+
+
+Shafer                  Expires February 1, 2018                [Page 7]
+
+Internet-Draft                                                 July 2017
+
 
    4.  Go, Cat, Go!
 
@@ -443,17 +435,20 @@ Internet-Draft                                                 July 2017
 
    o  Content follows, separated by vertical bars.
 
+   o  If a title is needed, the table is preceeded by a line containing
+      two dashes, the title, and an optional anchor:
+
+   Example::
+
+
+
+
 
 
 Shafer                  Expires February 1, 2018                [Page 8]
 
 Internet-Draft                                                 July 2017
 
-
-   o  If a title is needed, the table is preceeded by a line containing
-      two dashes, the title, and an optional anchor:
-
-   Example::
 
        -- List of Sub-Statements @sub-list@
        | substatement | section         | cardinality |
@@ -494,18 +489,6 @@ Internet-Draft                                                 July 2017
 
    Digressions of unknown type are ignored completely.
 
-
-
-
-
-
-
-
-Shafer                  Expires February 1, 2018                [Page 9]
-
-Internet-Draft                                                 July 2017
-
-
 2.1.6.1.  Document Digressions
 
    +-------------------------------------------------------------------+
@@ -514,6 +497,14 @@ Internet-Draft                                                 July 2017
    | Note that this needs to be updated for RFC7991, which deprecates  |
    | some of these fields.                                             |
    +-------------------------------------------------------------------+
+
+
+
+
+Shafer                  Expires February 1, 2018                [Page 9]
+
+Internet-Draft                                                 July 2017
+
 
    The "document" digression contains information about the document and
    is used for RFC header fields.  The contents of the digression are
@@ -555,13 +546,6 @@ Internet-Draft                                                 July 2017
       appear multiple times.  Each value should be a role, name,
       organization, and email address separated by colons.
 
-
-
-Shafer                  Expires February 1, 2018               [Page 10]
-
-Internet-Draft                                                 July 2017
-
-
    keyword  Keywords for the document, suitable for rfc/front/keyword.
       This line may appear multiple times to supply a set of keywords.
 
@@ -570,6 +554,14 @@ Internet-Draft                                                 July 2017
    A "open question" digress is used to record an open question within
    the document for the benefit of the document authors.  The question
    should be resolved before publication.  An open question can be
+
+
+
+Shafer                  Expires February 1, 2018               [Page 10]
+
+Internet-Draft                                                 July 2017
+
+
    entered using a "question" digression, or may appear in a line that
    starts with a question mark.
 
@@ -609,6 +601,14 @@ Internet-Draft                                                 July 2017
       processing or for allowing pre-formatted content.  Consider it as
       an option of last resort.
 
+2.2.  Additional Notes
+
+   Since github.com supports "org mode" rendering of ".org" files,
+   naming your file with a ".org" extension means automatic rendering of
+   a subset of oxtradoc features in the github file display.
+
+
+
 
 
 
@@ -618,13 +618,7 @@ Shafer                  Expires February 1, 2018               [Page 11]
 Internet-Draft                                                 July 2017
 
 
-2.2.  Additional Notes
-
-   Since github.com supports "org mode" rendering of ".org" files,
-   naming your file with a ".org" extension means automatic rendering of
-   a subset of oxtradoc features in the github display.
-
-3.  rfcdoc and rfcexample
+3.  "rfcdoc" and "rfcexample"
 
    This project consists of two github repositories.  The first
    ("rfcdoc") contains the captive versions of the tools used (oxtradoc,
@@ -666,6 +660,12 @@ Internet-Draft                                                 July 2017
 
    rfcdoc  Directory were the "rfcdoc" git module appears.
 
+   In this example Makefile, the user has written a draft named
+   "nmda-netconf.org", which is used to generate
+   "draft-dsdt-nmda-netconf-XX.txt".  A YANG module named
+   "ietf-netconf-datastores.yang" is included as part of the generated
+   file, and can be validated via the "make validate" command.
+
 
 
 
@@ -673,12 +673,6 @@ Shafer                  Expires February 1, 2018               [Page 12]
 
 Internet-Draft                                                 July 2017
 
-
-   In this example Makefile, the user has written a draft named
-   "nmda-netconf.org", which is used to generate
-   "draft-dsdt-nmda-netconf-XX.txt".  A YANG module named
-   "ietf-netconf-datastores.yang" is included as part of the generated
-   file, and can be validated via the "make validate" command.
 
        draft = nmda-netconf.org
        output_base = draft-dsdt-nmda-netconf
@@ -719,17 +713,6 @@ Internet-Draft                                                 July 2017
 
    clean  Cleans all generated files from the directory.
 
-
-
-
-
-
-
-Shafer                  Expires February 1, 2018               [Page 13]
-
-Internet-Draft                                                 July 2017
-
-
 4.  How to Use these Tools
 
    This section contains the simple steps for building your RFC.  In
@@ -739,6 +722,14 @@ Internet-Draft                                                 July 2017
    Avoid the desire to use the words "draft" or your own name in the
    name of your draft, since this will hopefully be temporary and your
    draft will be accepted by a working group, and eventually published.
+
+
+
+Shafer                  Expires February 1, 2018               [Page 13]
+
+Internet-Draft                                                 July 2017
+
+
    Once it's an RFC, having the base document be called
    "draft-phil-magic-cookies.org" would be bad.  Best to start naming it
    "magic-cookies.org" from the start.
@@ -779,13 +770,6 @@ Internet-Draft                                                 July 2017
        git commit -m 'Rename' MYDRAFT.org
        git push
 
-
-
-Shafer                  Expires February 1, 2018               [Page 14]
-
-Internet-Draft                                                 July 2017
-
-
    Edit your Makefile  The Makefile under your new repo has a few
       variables that direct the operation of the tools.  The first two
       are vital, and the rest can be used as your document grows.  The
@@ -794,6 +778,14 @@ Internet-Draft                                                 July 2017
       output document, and that value will depend on the working group,
       status, and topic of your document.  For now, we'll use
       "draft-MYNAME-MYDRAFT".  The remaining variables should be empty.
+
+
+
+Shafer                  Expires February 1, 2018               [Page 14]
+
+Internet-Draft                                                 July 2017
+
+
       The last two lines of the file should not be changed, since they
       allow us to find your copy of rfcdoc.
 
@@ -822,6 +814,14 @@ Author's Address
    Juniper Networks
 
    Email: phil@juniper.net
+
+
+
+
+
+
+
+
 
 
 

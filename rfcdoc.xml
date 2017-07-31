@@ -35,7 +35,6 @@ triggered by &quot;make&quot; to generate complete RFCs and Internet-Drafts.
 </front>
 <middle>
 <section title="Introduction" anchor="introduction">
-<section title="History" anchor="history">
     <t>
 In the NETCONF/NETMOD working groups, we&apos;ve been using some simple
 tools to ease the production of Internet Drafts and RFCs.  I use
@@ -68,7 +67,6 @@ With those simple goals, let me introduce our tools.
 If you lack the patience to weed through all these details, feel free
 to skip directly to the &quot;how to&quot; instructions locatated in <xref target="how-to"/>.
     </t>
-</section>
 <section title="oxtradoc" anchor="oxtradoc">
     <t>
 &quot;oxtradoc&quot; is the main tool, which turns text into &quot;xml2rfc&quot;-style XML
@@ -125,7 +123,7 @@ useful drafts.
     </t>
 </section>
 </section>
-<section title="oxtradoc" anchor="oxtradoc-2">
+<section title="The &quot;oxtradoc&quot; Tool" anchor="the-oxtradoc-tool">
     <t>
 &quot;oxtradoc&quot; performs the translation from plain text into xml2rfc-style
 XML content.  Specific rules must be followed, but the text input is
@@ -678,11 +676,11 @@ last resort.
     <t>
 Since github.com supports &quot;org mode&quot; rendering of &quot;.org&quot; files, naming
 your file with a &quot;.org&quot; extension means automatic rendering of a
-subset of oxtradoc features in the github display.
+subset of oxtradoc features in the github file display.
     </t>
 </section>
 </section>
-<section title="rfcdoc and rfcexample" anchor="rfcdoc-and-rfcexample">
+<section title="&quot;rfcdoc&quot; and &quot;rfcexample&quot;" anchor="rfcdoc-and-rfcexample">
     <t>
 This project consists of two github repositories.  The first (&quot;rfcdoc&quot;)
 contains the captive versions of the tools used (oxtradoc, pyang,
