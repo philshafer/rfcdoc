@@ -53,7 +53,7 @@ next_ver ?= 00
 else
 next_ver ?= $(shell printf "%.2d" $$((1${current_ver}-99)))
 endif
-output = ${output_base}-${next_ver}
+output ?= ${output_base}-${next_ver}
 
 .PHONY: latest submit clean validate
 
@@ -105,7 +105,7 @@ ${output}.txt: ${output}.xml
 
 ${output}.html: ${draft} ${references_xml} ${trees} ${load} ${yang}
 	@echo "Generating $@ ..."
-	${oxtradoc} -m html -n "${output}" $< > $@
+	${OXTRADOC} -m html -n "${output}" $< > $@
 
 new-tag: ${output}.txt
 	@echo Tagging with ${output}...
